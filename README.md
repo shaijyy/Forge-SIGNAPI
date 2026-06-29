@@ -1,13 +1,13 @@
-# IPA Signing API (ALL CODE WAS WRITTEN USING CHATGPT O1 MINI/O1 (and O3 mini >~<) shoutout to you :3)
+# Forge Signing API
 
-## Max IPA upload size is 2GB you can change that in the code if you wanna use it for your own site/locally
+## Max IPA upload size is 3GB, IPAs last for 10 minutes.
 
 ## HOW TO INSTALL
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/daisuke1227/DaiSign-API.git
-   cd DaiSign-API
+   git clone https://github.com/shaijyy/Forge-SIGNAPI.git
+   cd Forge-SIGNAPI
    ```
 1.5 **For linux/mac users only make the "zsign" file executeable**   
 ```bash
@@ -42,7 +42,6 @@ chmod +x zsign
    ```bash
    node app.js
    ```
-Welcome to the Signing API! This API allows you to upload an IPA file, a `.p12` certificate, and a provisioning profile, and it returns a link to install the signed app.
 
 ## Features
 - Upload IPA files for signing.
@@ -250,5 +249,5 @@ Credits
 
 Questions or Issues?
 
-If you have any questions or run into issues, feel free to reach out to me on [Discord](https://discord.com/users/630151942135480370) or [Telegram](https://t.me/dai1228)
+idk just open a pull request i guess
 
