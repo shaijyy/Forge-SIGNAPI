@@ -82,7 +82,7 @@ app.use('/plist', express.static(path.join(WORK_DIR, 'plist')));
 
 const upload = multer({
   dest: path.join(WORK_DIR, 'temp'),
-  limits: { fileSize: 2 * 1024 * 1024 * 1024 },
+  limits: { fileSize: 3 * 1024 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowedTypes = ['.ipa', '.p12', '.mobileprovision'];
     const ext = path.extname(file.originalname).toLowerCase();
@@ -125,52 +125,35 @@ function decrypt(encryptedText) {
 function generateManifestPlist(ipaUrl, bundleId, bundleVersion, displayName) {
   const defaultBundleId = 'com.example.default';
   return `<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
-"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-  <dict>
+<dict>
     <key>items</key>
     <array>
-      <dict>
-        <key>assets</key>
-        <array>
-          <dict>
-            <key>kind</key>
-            <string>software-package</string>
-            <key>url</key>
-            <string>${ipaUrl}</string>
-          </dict>
-          <dict>
-            <key>kind</key>
-            <string>display-image</string>
-            <key>needs-shine</key>
-            <false/>
-            <key>url</key>
-            <string>https://raw.githubusercontent.com/daisuke1227/RevengeUpdates/refs/heads/main/IMG_0651.png</string>
-          </dict>
-          <dict>
-            <key>kind</key>
-            <string>full-size-image</string>
-            <key>needs-shine</key>
-            <false/>
-            <key>url</key>
-            <string>https://raw.githubusercontent.com/daisuke1227/RevengeUpdates/refs/heads/main/IMG_0651.png</string>
-          </dict>
-        </array>
-        <key>metadata</key>
         <dict>
-          <key>bundle-identifier</key>
-          <string>${bundleId || defaultBundleId}</string>
-          <key>bundle-version</key>
-          <string>${bundleVersion}</string>
-          <key>kind</key>
-          <string>software</string>
-          <key>title</key>
-          <string>${displayName}</string>
+            <key>assets</key>
+            <array>
+                <dict>
+                    <key>kind</key>
+                    <string>software-package</string>
+                    <key>url</key>
+                    <string>${ipaUrl}</string>
+                </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+                <key>bundle-identifier</key>
+                <string>${bundleId || defaultBundleId}</string>
+                <key>bundle-version</key>
+                <string>${bundleVersion}</string>
+                <key>kind</key>
+                <string>software</string>
+                <key>title</key>
+                <string>${displayName}</string>
+            </dict>
         </dict>
-      </dict>
     </array>
-  </dict>
+</dict>
 </plist>`;
 }
 
@@ -370,7 +353,7 @@ app.post(
         } catch (e) {
           logger.error(`Failed to delete signed IPA: ${e}`);
         }
-      }, 3600000);
+      }, 600000);
 
       setTimeout(async () => {
         try {
@@ -381,7 +364,7 @@ app.post(
         } catch (e) {
           logger.error(`Failed to delete plist file: ${e}`);
         }
-      }, 3600000);
+      }, 600000);
 
     } catch (err) {
       logger.error(`Error during signing process: ${err}`);
@@ -414,7 +397,7 @@ app.post(
 
 function multerErrorHandler(err, req, res, next) {
   if (err instanceof multer.MulterError) {
-    if (err.code === 'LIMIT_FILE_SIZE') return res.status(413).json({ error: 'File too large. Maximum allowed size is 2GB.' });
+    if (err.code === 'LIMIT_FILE_SIZE') return res.status(413).json({ error: 'File too large. Maximum allowed size is 3GB.' });
     return res.status(400).json({ error: err.message });
   }
   if (err) return res.status(500).json({ error: 'An unexpected error occurred.' });
