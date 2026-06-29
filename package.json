@@ -1,5 +1,5 @@
 {
-  "name": "daisign-api",
+  "name": "forge-signapi",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
@@ -20,14 +20,14 @@
     "plist": "^3.1.0",
     "winston": "^3.17.0"
   },
-  "description": "## Max IPA upload size is 2GB you can change that in the code if you wanna use it for your own site/locally",
+  "description": "iOS IPA signing API",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daisuke1227/DaiSign-API.git"
+    "url": "git+https://github.com/shaijyy/Forge-SIGNAPI.git"
   },
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/daisuke1227/DaiSign-API/issues"
+    "url": "https://github.com/shaijyy/Forge-SIGNAPI/issues"
   },
-  "homepage": "https://github.com/daisuke1227/DaiSign-API#readme"
+  "homepage": "https://github.com/shaijyy/Forge-SIGNAPI"
 }
