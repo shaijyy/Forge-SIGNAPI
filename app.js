@@ -82,7 +82,7 @@ app.use('/plist', express.static(path.join(WORK_DIR, 'plist')));
 
 const upload = multer({
   dest: path.join(WORK_DIR, 'temp'),
-  limits: { fileSize: 3 * 1024 * 1024 * 1024 },
+  limits: { fileSize: 2 * 1024 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowedTypes = ['.ipa', '.p12', '.mobileprovision'];
     const ext = path.extname(file.originalname).toLowerCase();
@@ -397,7 +397,7 @@ app.post(
 
 function multerErrorHandler(err, req, res, next) {
   if (err instanceof multer.MulterError) {
-    if (err.code === 'LIMIT_FILE_SIZE') return res.status(413).json({ error: 'File too large. Maximum allowed size is 3GB.' });
+    if (err.code === 'LIMIT_FILE_SIZE') return res.status(413).json({ error: 'File too large. Maximum allowed size is 2GB.' });
     return res.status(400).json({ error: err.message });
   }
   if (err) return res.status(500).json({ error: 'An unexpected error occurred.' });
