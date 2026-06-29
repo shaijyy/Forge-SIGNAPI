@@ -1,6 +1,6 @@
 # Forge Signing API
 
-## Max IPA upload size is 3GB, IPAs last for 10 minutes.
+## Max IPA upload size is 2GB, IPAs last for 10 minutes.
 
 ## HOW TO INSTALL
 
